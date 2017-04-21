@@ -1,0 +1,13 @@
+[Desktop Entry]
+_Name=USB Startup Disk Creator
+Name[fr]=Créateur de disque de démarrage USB
+_GenericName=USB Startup Disk Creator
+_Comment=Create a USB startup disk using a CD or disc image
+Comment[fr]=Créer un disque de démarrage USB en utilisant un CD ou une image disque
+Exec=usb-creator-gtk
+Icon=usb-creator-gtk
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=System;Settings;GTK;HardwareSettings;
+X-Ubuntu-Gettext-Domain=usbcreator

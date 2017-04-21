@@ -1,0 +1,148 @@
+#!/usr/bin/python
+
+# Copyright (C) 2008 Canonical Ltd.
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 3,
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import sys
+import optparse
+import os
+import linecache
+import logging
+import traceback
+if 'USBCREATOR_LOCAL' in os.environ:
+    if os.getcwd().endswith('/bin'):
+        sys.path.insert(0, '..')
+    else:
+        sys.path.insert(0, '.')
+from usbcreator.gtk_frontend import GtkFrontend
+from dbus import DBusException
+import gtk
+
+trace_file = None
+def _traceit(frame, event, arg):
+    if event == "line":
+        lineno = frame.f_lineno
+        filename = frame.f_globals["__file__"]
+        if (filename.endswith(".pyc") or
+            filename.endswith(".pyo")):
+            filename = filename[:-1]
+        name = frame.f_globals["__name__"]
+        line = linecache.getline(filename, lineno)
+        print >>trace_file, "%s:%s: %s" % (name, lineno, line.rstrip())
+        trace_file.flush()
+    return _traceit
+
+usage = '%prog [options]'
+parser = optparse.OptionParser(usage=usage, version='0.1.11')
+parser.set_defaults(
+    safe=False,
+    iso=None,
+    persistent=True,
+    trace=False)
+parser.add_option('-s', '--safe', dest='safe', action='store_true',
+                  help='choose safer options when constructing the USB '
+                  'disk (may slow down the boot process).')
+parser.add_option('-i', '--iso', dest='img',
+                  help='provide a source image (CD or raw disk) to pre-populate the UI.')
+parser.add_option('-n', '--not_persistent', dest='persistent', action="store_false",
+                  help='disable persistent setting by default in the UI')
+parser.add_option('-t', '--trace', dest='trace', action='store_true',
+                  help='create a ~/.usb-creator.trace file')
+parser.add_option('-b', '--bundle-id', dest='bundle_id')
+parser.add_option('-a', '--activity-id', dest='activity_id')
+
+(options, args) = parser.parse_args()
+if options.safe:
+    os.environ['USBCREATOR_SAFE'] = '1'
+
+if options.trace:
+    if 'SUDO_USER' in os.environ:
+        filename = '%s/.usb-creator.trace' % \
+            os.path.expanduser('~' + os.environ['SUDO_USER'])
+    else:
+        filename = '%s/.usb-creator.trace' % \
+            os.path.expanduser('~')
+    trace_file = open(filename, 'w')
+    sys.settrace(_traceit)
+
+if os.getuid() != 0:
+    args = ['gksu', 'gksu', '--desktop',
+    '/usr/share/applications/usb-creator.desktop', '--']
+    args.extend(sys.argv)
+    os.execvp(args[0], args)
+
+def _fail(err, dialog_message=None):
+    if err:
+        logging.fatal(str(err))
+    trace = traceback.format_exc()
+    if trace:
+        logging.fatal(trace)
+    # FIXME evand 2009-04-30: Which log file?
+    if not dialog_message:
+        dialog_message = 'An error has occured.  '\
+                  'Please see the log file for more information.'
+    GtkFrontend.startup_failure(dialog_message)
+    sys.exit(1)
+
+def excepthook(exctype, excvalue, exctb):
+    text = ''.join(traceback.format_exception(exctype, excvalue, exctb))
+    _fail(text)
+
+old_excepthook = sys.excepthook
+sys.excepthook = excepthook
+
+try:
+    frontend = GtkFrontend(options.img, options.persistent)
+
+    def property_change_trapped(window, prop, prop_type, format, mode, data):
+        gtk.gdk.error_trap_push()
+
+        window.property_change(prop, prop_type, format, mode, data)
+
+        error = gtk.gdk.error_trap_pop()
+        if error:
+            logging.debug('Received X Error (%i) while setting '
+                          'a property on a window' % error)
+            raise RuntimeError('Received X Error (%i) while setting '
+                               'a property on a window' % error)
+
+    def realize_cb(window):
+        property_change_trapped(window.window, '_SUGAR_ACTIVITY_ID',
+                'STRING', 8, gtk.gdk.PROP_MODE_REPLACE, options.activity_id)
+        property_change_trapped(window.window, '_SUGAR_BUNDLE_ID',
+                'STRING', 8, gtk.gdk.PROP_MODE_REPLACE, options.bundle_id)
+    frontend.window.connect('realize', realize_cb)
+
+    frontend.window.show()
+
+    gtk.main()
+
+    # TODO evand 2009-05-01: Backend base class, Windows backend.
+    # TODO evand 2009-05-03: Should construct the backend here as well, have
+    # the UI greyed out with a spinning cursor until it's ready.
+except DBusException, e:
+    if e._dbus_error_name == 'org.freedesktop.DBus.Error.ServiceUnknown':
+        message = 'This program needs HAL running in order to properly ' \
+        'function.  Please start HAL by running `sudo /etc/init.d/hal ' \
+        'start` in a Terminal window (Applications -> Accessories -> ' \
+        'Terminal).'
+        _fail(e, dialog_message=message)
+    else:
+        _fail(e)
+except KeyboardInterrupt:
+    pass
+    # TODO evand 2009-05-03: What should we do here to make sure devices are
+    # unmounted, etc?
+except Exception, e:
+    _fail(e)

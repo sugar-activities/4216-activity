@@ -1,0 +1,190 @@
+# Catalan translations for usb-creator package
+# Traduccions al català del paquet «usb-creator».
+# Copyright (C) 2009 THE usb-creator'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the usb-creator package.
+# David Planella <david.planella@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: usb-creator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-24 10:37+0100\n"
+"PO-Revision-Date: 2009-01-16 19:09+0000\n"
+"Last-Translator: David Planella <Unknown>\n"
+"Language-Team: Catalan <ubuntu-l10n-ca@lists.ubuntu.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-07-24 09:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#. Some of the code in this function was copied from Ubiquity's
+#. scripts/install.py
+#: .././scripts/install.py:46
+msgid "Copying files\n"
+msgstr ""
+
+#: .././scripts/install.py:143
+msgid "Creating persistence file\n"
+msgstr ""
+
+#: .././scripts/install.py:146
+msgid "Making persistence filesystem\n"
+msgstr ""
+
+#: .././usbcreator/backend.py:371
+#, fuzzy, python-format
+msgid ""
+"Unable to mount the image %s.\n"
+"\n"
+"Please see ~/.usb-creator.log for more details"
+msgstr ""
+"Ha fallat la instal·lació. Vegeu ~.usb-creator.log per a obtenir-ne més "
+"detalls.\n"
+
+#: .././usbcreator/backend.py:524
+msgid "Unable to format the device"
+msgstr ""
+
+#: .././usbcreator/backend.py:562
+msgid ""
+"An error occured during the installation, and it was unable to complete."
+msgstr ""
+
+#: .././usbcreator/backend.py:590 .././usbcreator/backend.py:592
+msgid "Copying files"
+msgstr ""
+
+#: .././usbcreator/backend.py:634
+msgid "Installing the bootloader"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:320 .././usbcreator/kde_frontend.py:448
+msgid "CD-Drive/Image"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:329 .././usbcreator/kde_frontend.py:457
+msgid "OS Version"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:335 .././usbcreator/kde_frontend.py:463
+msgid "Size"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:466 .././usbcreator/kde_frontend.py:600
+msgid "Device"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:477 .././usbcreator/kde_frontend.py:611
+msgid "Label"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:483 .././usbcreator/kde_frontend.py:617
+msgid "Capacity"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:489 .././usbcreator/kde_frontend.py:623
+msgid "Free Space"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:498 .././usbcreator/kde_frontend.py:633
+msgid "ISO Files"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:498 .././usbcreator/kde_frontend.py:633
+msgid "IMG Files"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:521 .././usbcreator/kde_frontend.py:645
+msgid "Starting up"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:529
+#, python-format
+msgid "%d%% complete"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:533
+#, python-format
+msgid "%d%% complete (%dm%ss remaining)"
+msgstr ""
+
+#: .././usbcreator/kde_frontend.py:650
+msgid "You must select both source image and target device first."
+msgstr ""
+
+#: .././usbcreator/kde_frontend.py:680
+msgid ""
+"Installation is complete.  You may now reboot your computer with this USB "
+"thumb drive inserted to boot Ubuntu."
+msgstr ""
+"S'ha completat la instal·lació. Ara podeu reiniciar l'ordinador amb aquest "
+"llapis USB connectat per a arrencar en l'Ubuntu."
+
+#: .././usbcreator/kde_frontend.py:693
+msgid "Quit the installation?"
+msgstr "Voleu sortir de la instal·lació?"
+
+#: .././usbcreator/kde_frontend.py:694
+msgid "Do you really want to quit the installation now?"
+msgstr "Segur que voleu sortir de la instal·lació?"
+
+#: .././desktop/usb-creator-gtk.desktop.in.h:1
+#: .././desktop/usb-creator-kde.desktop.in.h:1
+msgid "Create a USB startup disk using a CD or disc image"
+msgstr ""
+
+#: .././desktop/usb-creator-gtk.desktop.in.h:2
+#: .././desktop/usb-creator-kde.desktop.in.h:2
+#, fuzzy
+msgid "USB Startup Disk Creator"
+msgstr "Creació d'un disc d'arrencada USB"
+
+#~ msgid "Discarded on shutdown, unless you save them elsewhere"
+#~ msgstr "Es descartaran en apagar, a no ser que els deseu en un altre lloc"
+
+#~ msgid "Format"
+#~ msgstr "Formata"
+
+#~ msgid "How much:"
+#~ msgstr "Quant:"
+
+#~ msgid "Installation Complete"
+#~ msgstr "S'ha completat la instal·lació"
+
+#~ msgid "Installation Failed"
+#~ msgstr "Ha fallat la instal·lació"
+
+#~ msgid "Make Startup Disk"
+#~ msgstr "Creació d'un disc d'arrencada"
+
+#~ msgid "Other..."
+#~ msgstr "Altre..."
+
+#~ msgid "Source disc image (.iso) or CD:"
+#~ msgstr "Imatge de disc (.iso) o CD d'origen:"
+
+#~ msgid "Stored in reserved extra space"
+#~ msgstr "Es desaran en un espai reservat addicional"
+
+#~ msgid ""
+#~ "To try or install Ubuntu from a USB disk, it needs\n"
+#~ "to be set up as a startup disk."
+#~ msgstr ""
+#~ "Per a provar o instal·lar l'Ubuntu des d'un disc USB\n"
+#~ "cal configurar-lo com a disc d'arrencada."
+
+#~ msgid "USB disk to use:"
+#~ msgstr "Disc USB a utilitzar:"
+
+#~ msgid "When starting up from this disk, documents and settings will be:"
+#~ msgstr "En arrencar des d'aquest disc, els documents i la configuració:"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "gtk-cancel"
+
+#~ msgid "gtk-open"
+#~ msgstr "gtk-open"
+
+#~ msgid "gtk-quit"
+#~ msgstr "gtk-quit"

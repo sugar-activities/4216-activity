@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+
+DEB_PYTHON_SYSTEM=pycentral
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/python-distutils.mk
+
+#
+# what does this do? RBG
+#
+#binary-install/usb-creator-gtk::
+#	dh_desktop -p$(cdbs_curpkg)
+
+#binary-install/usb-creator-kde::
+#	dh_desktop -p$(cdbs_curpkg)

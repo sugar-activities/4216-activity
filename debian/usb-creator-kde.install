@@ -1,0 +1,7 @@
+usr/bin/usb-creator-kde
+usr/lib/python*/*/usbcreator/kde_about.py    
+usr/lib/python*/*/usbcreator/kde_frontend.py 
+usr/lib/python*/*/usbcreator/translate.py    
+usr/share/applications/usb-creator-kde.desktop
+usr/share/kde4/apps/usb-creator-kde/usbcreator.ui
+usr/share/pixmaps/usb-creator-kde.png

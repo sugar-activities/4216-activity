@@ -1,0 +1,8 @@
+[Activity]
+name = USB Creator
+activity_version = 1
+bundle_id = usbcreator
+icon = usb-creator
+exec = usb-creator-sugar
+show_launcher = yes
+license = GPLv3

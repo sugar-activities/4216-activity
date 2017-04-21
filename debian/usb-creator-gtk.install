@@ -1,0 +1,6 @@
+usr/bin/usb-creator-gtk
+usr/lib/python*/*/usbcreator/gtk_frontend.py 
+#usr/lib/python*/*/usbcreator/wrap_label.py   
+usr/share/applications/usb-creator-gtk.desktop
+usr/share/usb-creator/usbcreator-gtk.ui
+usr/share/pixmaps/usb-creator-gtk.png

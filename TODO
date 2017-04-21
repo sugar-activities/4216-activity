@@ -1,0 +1,7 @@
+TODO for usb-creator-kde integration:
+-------------------------------------
+1) Integrate PolicyKit
+2) Finish conversion of gtk_frontend.py to kde_frontend.py
+3) Validate Icon choices
+4) FIx/Add Translation support for kde_frontend.py and usbcreator.ui
+5) QA and testing

@@ -1,0 +1,5 @@
+usr/lib/python*/*/*.egg-info 
+usr/lib/python*/*/usbcreator/__init__.py
+usr/lib/python*/*/usbcreator/backend.py
+usr/lib/python*/*/usbcreator/remtimest.py
+usr/share/usb-creator/install.py

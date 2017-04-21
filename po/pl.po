@@ -1,0 +1,190 @@
+# Polish translation for usb-creator
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the usb-creator package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: usb-creator\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-07-24 10:37+0100\n"
+"PO-Revision-Date: 2009-05-20 15:53+0000\n"
+"Last-Translator: Bartosz Wierzejewski <bartoszwierzejewski@o2.pl>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-07-24 09:28+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#. Some of the code in this function was copied from Ubiquity's
+#. scripts/install.py
+#: .././scripts/install.py:46
+msgid "Copying files\n"
+msgstr ""
+
+#: .././scripts/install.py:143
+msgid "Creating persistence file\n"
+msgstr ""
+
+#: .././scripts/install.py:146
+msgid "Making persistence filesystem\n"
+msgstr ""
+
+#: .././usbcreator/backend.py:371
+#, fuzzy, python-format
+msgid ""
+"Unable to mount the image %s.\n"
+"\n"
+"Please see ~/.usb-creator.log for more details"
+msgstr ""
+"Instalacja nie powiodła się. Dodatkowe informacje są dostępne w pliku ~/.usb-"
+"creator.log.\n"
+
+#: .././usbcreator/backend.py:524
+msgid "Unable to format the device"
+msgstr ""
+
+#: .././usbcreator/backend.py:562
+msgid ""
+"An error occured during the installation, and it was unable to complete."
+msgstr ""
+
+#: .././usbcreator/backend.py:590 .././usbcreator/backend.py:592
+msgid "Copying files"
+msgstr ""
+
+#: .././usbcreator/backend.py:634
+msgid "Installing the bootloader"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:320 .././usbcreator/kde_frontend.py:448
+msgid "CD-Drive/Image"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:329 .././usbcreator/kde_frontend.py:457
+msgid "OS Version"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:335 .././usbcreator/kde_frontend.py:463
+msgid "Size"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:466 .././usbcreator/kde_frontend.py:600
+msgid "Device"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:477 .././usbcreator/kde_frontend.py:611
+msgid "Label"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:483 .././usbcreator/kde_frontend.py:617
+msgid "Capacity"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:489 .././usbcreator/kde_frontend.py:623
+msgid "Free Space"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:498 .././usbcreator/kde_frontend.py:633
+msgid "ISO Files"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:498 .././usbcreator/kde_frontend.py:633
+msgid "IMG Files"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:521 .././usbcreator/kde_frontend.py:645
+msgid "Starting up"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:529
+#, python-format
+msgid "%d%% complete"
+msgstr ""
+
+#: .././usbcreator/gtk_frontend.py:533
+#, python-format
+msgid "%d%% complete (%dm%ss remaining)"
+msgstr ""
+
+#: .././usbcreator/kde_frontend.py:650
+msgid "You must select both source image and target device first."
+msgstr ""
+
+#: .././usbcreator/kde_frontend.py:680
+msgid ""
+"Installation is complete.  You may now reboot your computer with this USB "
+"thumb drive inserted to boot Ubuntu."
+msgstr ""
+"Instalacja ukończona. Można uruchomić teraz komputer ponownie z tym napędem "
+"USB podłączonym do komputera, aby uruchomić Ubuntu."
+
+#: .././usbcreator/kde_frontend.py:693
+msgid "Quit the installation?"
+msgstr "Zakończyć instalację?"
+
+#: .././usbcreator/kde_frontend.py:694
+msgid "Do you really want to quit the installation now?"
+msgstr "Czy na pewno zakończyć instalację?"
+
+#: .././desktop/usb-creator-gtk.desktop.in.h:1
+#: .././desktop/usb-creator-kde.desktop.in.h:1
+msgid "Create a USB startup disk using a CD or disc image"
+msgstr ""
+
+#: .././desktop/usb-creator-gtk.desktop.in.h:2
+#: .././desktop/usb-creator-kde.desktop.in.h:2
+#, fuzzy
+msgid "USB Startup Disk Creator"
+msgstr "Tworzenie dysku startowego USB"
+
+#~ msgid "Discarded on shutdown, unless you save them elsewhere"
+#~ msgstr ""
+#~ "Porzucane przy zamknięciu, dopóki nie zostaną zapisane gdzie indziej"
+
+#~ msgid "Format"
+#~ msgstr "Formatowanie"
+
+#~ msgid "How much:"
+#~ msgstr "Rozmiar:"
+
+#~ msgid "Installation Complete"
+#~ msgstr "Instalacja ukończona"
+
+#~ msgid "Installation Failed"
+#~ msgstr "Instalacja nie powiodła się"
+
+#~ msgid "Make Startup Disk"
+#~ msgstr "Utwórz dysk startowy"
+
+#~ msgid "Other..."
+#~ msgstr "Inny..."
+
+#~ msgid "Source disc image (.iso) or CD:"
+#~ msgstr "Obraz dysku źródłowego (ISO) lub płyta CD:"
+
+#~ msgid "Stored in reserved extra space"
+#~ msgstr "Przechowywane w zarezerwowanej dodatkowej przestrzeni"
+
+#~ msgid ""
+#~ "To try or install Ubuntu from a USB disk, it needs\n"
+#~ "to be set up as a startup disk."
+#~ msgstr ""
+#~ "Aby móc zainstalować Ubuntu z dysku USB,\n"
+#~ "dysk musi być ustawiony jako rozruchowy."
+
+#~ msgid "USB disk to use:"
+#~ msgstr "Dysk USB do użycia:"
+
+#~ msgid "When starting up from this disk, documents and settings will be:"
+#~ msgstr "Podczas rozruchu z tego dysku dokumenty i ustawienia będą:"
+
+#~ msgid "gtk-cancel"
+#~ msgstr "Anuluj"
+
+#~ msgid "gtk-open"
+#~ msgstr "Otwórz"
+
+#~ msgid "gtk-quit"
+#~ msgstr "Zamknij"

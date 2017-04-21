@@ -1,0 +1,49 @@
+This package was debianized by Evan Dandrea <evand@ubuntu.com> on
+Mon, 01 Sep 2008 02:07:59 -0400.
+
+Upstream Author:
+    Evan Dandrea <evand@ubuntu.com>
+
+Copyright:
+
+    Copyright (C) 2008 Canonical Ltd.
+
+KDE/Qt port Details
+-------------------
+
+Author:
+    Roderick B. Greening <roderick.greening@gmail.com>
+
+Copyright:
+
+    Copyright (C) 2009 Roderick B. Greening
+
+Some porting based on kde_frontend.py from:
+    launchpad.net/~david.edmundson/usb-creator/kde-frontend/
+
+Author:
+    David Edmundson <kde@davidedmundson.co.uk>
+
+Copyright:
+
+    Copyright (C) 2008 David Edmundson
+
+License:
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 3,
+as published by the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+The Debian packaging is (C) 2008, Evan Dandrea <evand@ubuntu.com> and
+is licensed under the GPL, see above.

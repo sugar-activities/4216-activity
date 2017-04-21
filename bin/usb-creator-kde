@@ -1,0 +1,154 @@
+#!/usr/bin/python
+
+# Copyright (C) 2009 Roderick B. Greening <roderick.greening@gmail.com>
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License version 3,
+# as published by the Free Software Foundation.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import sys
+import os
+import linecache
+import logging
+import traceback
+
+from dbus import DBusException
+
+from PyQt4 import uic
+from PyKDE4.kdecore import KCmdLineArgs, KCmdLineOptions, i18n, ki18n
+from PyKDE4.kdeui import KApplication, KIcon
+
+if 'USBCREATOR_LOCAL' in os.environ:
+    if os.getcwd().endswith('/bin'):
+        sys.path.insert(0, '..')
+    else:
+        sys.path.insert(0, '.')
+
+from usbcreator.translate import translate
+from usbcreator.kde_about import AboutData
+from usbcreator.kde_frontend import KdeFrontend
+
+def _traceit(frame, event, arg):
+    if event == "line":
+        lineno = frame.f_lineno
+        filename = frame.f_globals["__file__"]
+        if (filename.endswith(".pyc") or
+            filename.endswith(".pyo")):
+            filename = filename[:-1]
+        name = frame.f_globals["__name__"]
+        line = linecache.getline(filename, lineno)
+        print >>trace_file, "%s:%s: %s" % (name, lineno, line.rstrip())
+        trace_file.flush()
+    return _traceit
+
+def _fail(err, dialog_message=None):
+    if err:
+        logging.fatal(str(err))
+    trace = traceback.format_exc()
+    if trace:
+        logging.fatal(trace)
+    # FIXME evand 2009-04-30: Which log file?
+    if not dialog_message:
+        dialog_message = 'An error has occured.  '\
+                  'Please see the log file for more information.'
+    KdeFrontend.startup_failure(dialog_message)
+    sys.exit(1)
+
+def excepthook(exctype, excvalue, exctb):
+    text = ''.join(traceback.format_exception(exctype, excvalue, exctb))
+    _fail(text)
+
+if __name__ == "__main__":
+    """Initialize and launch the application"""
+
+    uic.properties.Properties._string = translate
+    trace_file = None
+
+    # Add cmdline options
+    options = KCmdLineOptions()
+    options.add("s").add("safe", ki18n("choose safer options when constructing the USB disk (may slow down the boot process)."))
+    options.add("i").add("iso <img>", ki18n("provide a source image (CD or raw disk) to pre-populate the UI."))
+    options.add("n").add("nopersistent", ki18n("disable persistent setting by default in the UI"))
+    options.add("t").add("trace", ki18n("create a ~/.usb-creator-kde.trace file"))
+
+    # Initialize KApplication required bits
+    aboutData = AboutData()
+    KCmdLineArgs.init(sys.argv, aboutData)
+    KCmdLineArgs.addCmdLineOptions(options)
+    app = KApplication()
+    # FIXME:
+    # - we need this icon to exist and be installed...
+    app.setWindowIcon(KIcon("usb-creator-kde"))
+    if app.isSessionRestored():
+        sys.exit(1)
+    args = KCmdLineArgs.parsedArgs()
+
+    # Default cmdline arg values
+    safe = False
+    img = None
+    persistent = False
+    trace = False
+
+    # Test and update passed args
+    if args.isSet("safe"):
+        safe = True
+    if args.isSet("iso"):
+        img = args.getOption("iso")
+    if args.isSet("persistent"):
+        persistent = True
+    if args.isSet("trace"):
+        trace = True
+
+    if safe:
+        os.environ['USBCREATOR_SAFE'] = '1'
+    
+    if trace:
+        if 'SUDO_USER' in os.environ:
+            filename = '%s/.usb-creator-kde.trace' % \
+                os.path.expanduser('~' + os.environ['SUDO_USER'])
+        else:
+            filename = '%s/.usb-creator-kde.trace' % \
+                os.path.expanduser('~')
+        trace_file = open(filename, 'w')
+        sys.settrace(_traceit)
+    
+    # FIXME:
+    # 1) This works, but does not pass along the remaining cmdline bits.. so broken
+    # 2) Put the correct path
+    # 3) PolicyKit would be nice...
+    # FIXME: path below is not correct...
+    if os.getuid() != 0:
+        args = ['kdesudo',
+        'usb-creator-kde']
+        args.extend(sys.argv)
+        os.execvp(args[0], args)
+    
+    old_excepthook = sys.excepthook
+    sys.excepthook = excepthook
+    
+    try:
+        frontend = KdeFrontend(img, persistent)
+    except DBusException, e:
+        if e._dbus_error_name == 'org.freedesktop.DBus.Error.ServiceUnknown':
+            message = 'This program needs HAL running in order to properly ' \
+            'function.  Please start HAL by running `sudo /etc/init.d/hal ' \
+            'start` in a Terminal window (Applications -> Accessories -> ' \
+            'Terminal).'
+            _fail(e, dialog_message=message)
+        else:
+            _fail(e)
+    except KeyboardInterrupt:
+        pass
+    except Exception, e:
+        _fail(e)
+    
+    # Properly exit KApplication
+    sys.exit(app.exec_())

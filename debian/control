@@ -1,0 +1,52 @@
+Source: usb-creator
+Section: admin
+Priority: optional
+Maintainer: Ubuntu Installer Team <ubuntu-installer@lists.ubuntu.com>
+Build-Depends: cdbs (>= 0.4.43), debhelper (>= 7), python, python-central (>= 0.5.6), python-distutils-extra
+XS-Python-Version: current
+Standards-Version: 3.8.2
+Vcs-Bzr: http://bazaar.launchpad.net/~usb-creator-hackers/usb-creator/trunk
+
+Package: usb-creator-common
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-dbus, syslinux, parted, mtools
+XB-Python-Version: ${python:Versions}
+Conflicts: usb-creator (<< 0.2.0~beta1)
+Replaces: usb-creator (<< 0.2.0~beta1)
+Description: Ubuntu USB desktop image creator common files
+ This is a simple utility designed to make bootable USB desktop images from
+ Ubuntu CDs.
+ .
+ This package contains all the backend engine and other common data files used
+ by each frontend engine.
+
+Package: usb-creator
+Architecture: all
+Depends: ${misc:Depends}, usb-creator-gtk
+Description: Ubuntu USB desktop image creator transitional meta-package for GTK
+ This is a simple utility designed to make bootable USB desktop images from
+ Ubuntu CDs.
+ .
+ This package is a transitional package, to allow moving from usb-creator to 
+ usb-creator-gtk, now that we have more than one frontend. This package can
+ safely be removed after upgrade.
+
+Package: usb-creator-gtk
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, usb-creator-common (= ${source:Version}), gksu, python-gtk2 (>= 2.12), python-dbus, python-gnome2
+XB-Python-Version: ${python:Versions}
+Description: Ubuntu USB desktop image creator for GTK
+ This is a simple utility designed to make bootable USB desktop images from
+ Ubuntu CDs.
+ .
+ This package contains the GTK client frontend.
+
+Package: usb-creator-kde
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, usb-creator-common (= ${source:Version}), kdesudo, python-qt4, python-kde4, python-dbus
+XB-Python-Version: ${python:Versions}
+Description: Ubuntu USB desktop image creator for KDE
+ This is a simple utility designed to make bootable USB desktop images from
+ Ubuntu CDs.
+ .
+ This package contains the KDE client frontend.

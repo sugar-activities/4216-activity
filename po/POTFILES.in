@@ -1,0 +1,14 @@
+./gui/usbcreator.ui
+./gui/usbcreator-gtk.ui
+./scripts/install.py
+./usbcreator/remtimest.py
+./usbcreator/__init__.py
+./usbcreator/backend.py
+./usbcreator/wrap_label.py
+./usbcreator/gtk_frontend.py
+./usbcreator/kde_about.py
+./usbcreator/kde_frontend.py
+./usbcreator/translate.py
+./gui/usbcreator-gtk.ui
+./desktop/usb-creator-gtk.desktop.in
+./desktop/usb-creator-kde.desktop.in
